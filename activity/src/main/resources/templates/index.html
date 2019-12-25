@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div class="result-div">
+
+    </div>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+    <script>
+        $.ajax({
+            async: false,
+            cache: false,
+            type: 'GET',
+            url: '/activiti/showImg?instanceId=46497397-261c-11ea-9585-00f48dcd094e',
+            // dataType : "html",
+            error: function (jqXHR, textStatus, errorThrown) {
+                /*弹出jqXHR对象的信息*/
+                console.log(jqXHR.responseText);
+                console.log(jqXHR.status);
+                console.log(jqXHR.readyState);
+                console.log(jqXHR.statusText);
+                /*弹出其他两个参数的信息*/
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+            ,
+            success: function (data) {
+                $(".result-div").html(data);
+            }
+        });
+    </script>
+</div>
+</body>
+</html>

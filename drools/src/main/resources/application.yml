@@ -1,0 +1,12 @@
+server:
+  port: 8887
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///drools?ServerTimeZone=UTC
+    username: root
+    password: root
+logging:
+  level:
+    web: debug

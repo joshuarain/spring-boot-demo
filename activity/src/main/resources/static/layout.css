@@ -1,0 +1,9 @@
+.quick-entry {
+    margin: 30px;
+    height: 150px;
+    border: 1px solid #ccc;
+}
+
+ul{
+    list-style: none;
+}

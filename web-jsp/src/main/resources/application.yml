@@ -1,0 +1,15 @@
+server:
+  port: 8888
+
+spring:
+  mvc:
+    view:
+      prefix: /webapp/WEB-INF/view/
+      suffix: .jsp
+  thymeleaf:
+    cache: false
+    enable-spring-el-compiler: false
+
+logging:
+  level:
+    web: debug

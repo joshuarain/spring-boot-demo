@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<kmodule xmlns="http://www.drools.org/xsd/kmodule">
+    <kbase name="rules" packages="rules"> <!-- packages="hello"，就表示加载classpath:resources/hello下的drl文件 -->
+        <ksession name="ksession-hello"/>
+    </kbase>
+</kmodule>

@@ -1,0 +1,23 @@
+server:
+  port: 8888
+
+spring:
+  datasource: # 仅引入connector.jar 无法注入 datasource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///activiti?serverTimezone=UTC&rewriteBatchedStatements=true #?characterEncoding=utf8&useSSL=false&serverTimezone=UTC #没有rewrite不自动建表了
+    username: root
+    password: root
+  activiti:
+    database-schema-update: true
+    check-process-definitions: false
+    history-level: full
+    db-history-used: true
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+
+
+
+logging:
+  level:
+    web: debug

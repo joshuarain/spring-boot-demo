@@ -1,0 +1,21 @@
+package com.rules
+import com.zhl.springboot.drools.entity.Address
+import com.zhl.springboot.drools.entity.AddressCheckResult
+
+
+
+rule "rule 1"
+dialect "java"
+    when
+        Address()
+    then
+        System.out.println("work memory 中插入了 address");
+end
+
+rule "No LHS"
+dialect "java"
+    when
+        eval(true)
+    then
+        System.out.println("无条件规则通过!");
+end
