@@ -55,7 +55,7 @@
         <module>redis</module>
         <module>rocketmq</module>
         <module>activity</module>
-        <module>drools</module>
+        <module>camunda</module>
     </modules>
 
 </project>
