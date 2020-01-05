@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_06vygu9" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
+  <bpmn:process id="Process_Post" name="Post_Process" isExecutable="true" camunda:jobPriority="1" camunda:candidateStarterGroups="group_1,group_2" camunda:candidateStarterUsers="user_1,user_2" camunda:versionTag="0.0.1" camunda:historyTimeToLive="3000" camunda:taskPriority="1">
+    <bpmn:documentation>Process_Doc</bpmn:documentation>
+    <bpmn:extensionElements>
+      <camunda:executionListener class="com.zhl.springboot.camunda.listener.StartProcess" event="start">
+        <camunda:field name="process_starter">
+          <camunda:string>zhanglei</camunda:string>
+        </camunda:field>
+      </camunda:executionListener>
+      <camunda:properties>
+        <camunda:property name="add_property_1" value="value_1" />
+        <camunda:property name="add_property_2" value="value_2" />
+      </camunda:properties>
+    </bpmn:extensionElements>
+    <bpmn:startEvent id="Start_Post_Event" name="Start_Post" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:jobPriority="1" camunda:formKey="start_form_key" camunda:initiator="zhanglei">
+      <bpmn:documentation>发帖开始文档</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="start_property" value="start_value_1" />
+        </camunda:properties>
+        <camunda:executionListener class="com.zhl.springboot.camunda.listener.StartEventListener" event="start">
+          <camunda:field name="start_filed">
+            <camunda:string>start_value_1</camunda:string>
+          </camunda:field>
+        </camunda:executionListener>
+        <camunda:formData businessKey="FormField_1kifhai">
+          <camunda:formField id="FormField_1kifhai" label="username" type="string" defaultValue="zhanglei">
+            <camunda:properties>
+              <camunda:property id="Property_241khtk" value="value_add" />
+            </camunda:properties>
+            <camunda:validation>
+              <camunda:constraint name="maxlength" config="25" />
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+        <camunda:failedJobRetryTimeCycle>R5/PT7M</camunda:failedJobRetryTimeCycle>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_0mun7kt</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0mun7kt" name="SequenceFlow1" sourceRef="Start_Post_Event" targetRef="User_Task_1">
+      <bpmn:documentation>SequenceFlowDoc1</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:executionListener class="com.zhl.springboot.camunda.listener.SequenceFlowListener" event="take">
+          <camunda:field name="seq_var">
+            <camunda:string>789</camunda:string>
+          </camunda:field>
+        </camunda:executionListener>
+        <camunda:properties>
+          <camunda:property name="seq_prop" value="seq_val" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1db1izo" name="网关1" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:jobPriority="1">
+      <bpmn:documentation>gatewayDoc</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:executionListener class="com.zhl.springboot.camunda.listener.GatewayListener" event="start">
+          <camunda:field name="gateway_var">
+            <camunda:string>gateway_val</camunda:string>
+          </camunda:field>
+        </camunda:executionListener>
+        <camunda:properties>
+          <camunda:property name="gateway_prop" value="gateway_val" />
+        </camunda:properties>
+        <camunda:failedJobRetryTimeCycle>R5/PT7M</camunda:failedJobRetryTimeCycle>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1kw45wo</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_012waqt</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_1kykxs4</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_1kw45wo" sourceRef="User_Task_1" targetRef="ExclusiveGateway_1db1izo" />
+    <bpmn:userTask id="User_Task_1" name="一级审核" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:jobPriority="1" camunda:formKey="user_task_form" camunda:assignee="yangyang" camunda:candidateUsers="xiaozhan,wangyibo" camunda:candidateGroups="chenqingling,qingyunian" camunda:dueDate="2020-01-04T18:00:00" camunda:followUpDate="2020-01-05T18:00:00" camunda:priority="1">
+      <bpmn:documentation>user_task_1_doc</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="FormField_0eo80br" label="user_password" type="string" defaultValue="123456">
+            <camunda:properties>
+              <camunda:property id="Property_2nvb224" value="val" />
+              <camunda:property id="Property_2ao2djo" value="val2" />
+            </camunda:properties>
+            <camunda:validation>
+              <camunda:constraint name="maxlength" config="25" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+        <camunda:executionListener class="com.zhl.springboot.camunda.listener.Execution1" event="start">
+          <camunda:field name="username">
+            <camunda:string>zhl</camunda:string>
+          </camunda:field>
+          <camunda:field name="password">
+            <camunda:string>123456</camunda:string>
+          </camunda:field>
+        </camunda:executionListener>
+        <camunda:taskListener class="com.zhl.springboot.camunda.listener.TaskListener1" event="complete" id="complete_1">
+          <camunda:field name="username">
+            <camunda:string>task_1</camunda:string>
+          </camunda:field>
+        </camunda:taskListener>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_2ir4gve" />
+          <camunda:inputParameter name="Input_27ai6h9" />
+          <camunda:outputParameter name="Output_2f85kfo" />
+        </camunda:inputOutput>
+        <camunda:properties>
+          <camunda:property name="prop_1" value="1" />
+          <camunda:property name="prop_2" value="2" />
+        </camunda:properties>
+        <camunda:failedJobRetryTimeCycle>R5/PT7M</camunda:failedJobRetryTimeCycle>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0mun7kt</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1kw45wo</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_012waqt" sourceRef="ExclusiveGateway_1db1izo" targetRef="Task_0tkjjsj">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approve==true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1kykxs4" sourceRef="ExclusiveGateway_1db1izo" targetRef="Task_0vcfsbk">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approve==false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:serviceTask id="Task_0tkjjsj" name="serviceTask1" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:jobPriority="1" camunda:class="com.zhl.springboot.camunda.DetailsDemo">
+      <bpmn:documentation>service_task_doc</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:executionListener class="com.zhl.springboot.camunda.listener.StopListener" event="end">
+          <camunda:field name="field_var">
+            <camunda:string>filed_val</camunda:string>
+          </camunda:field>
+        </camunda:executionListener>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_1q3ih6q">12</camunda:inputParameter>
+          <camunda:inputParameter name="Input_348tfop">34</camunda:inputParameter>
+          <camunda:outputParameter name="Output_05me1go">45</camunda:outputParameter>
+          <camunda:outputParameter name="Output_1he49v8">78</camunda:outputParameter>
+        </camunda:inputOutput>
+        <camunda:field name="field_var">
+          <camunda:string>field_val123</camunda:string>
+        </camunda:field>
+        <camunda:properties>
+          <camunda:property name="service_var_1" value="service_val_1" />
+        </camunda:properties>
+        <camunda:failedJobRetryTimeCycle>R5/PT7M</camunda:failedJobRetryTimeCycle>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_012waqt</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_18fq879</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_0vcfsbk" name="serviceTask2" camunda:class="com.zhl.springboot.camunda.ServiceTask2">
+      <bpmn:incoming>SequenceFlow_1kykxs4</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0mki5gb</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EndEvent_03e8b7v" name="结束">
+      <bpmn:incoming>SequenceFlow_18fq879</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0mki5gb</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_18fq879" sourceRef="Task_0tkjjsj" targetRef="EndEvent_03e8b7v" />
+    <bpmn:sequenceFlow id="SequenceFlow_0mki5gb" sourceRef="Task_0vcfsbk" targetRef="EndEvent_03e8b7v" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_Post">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="Start_Post_Event">
+        <dc:Bounds x="179" y="119" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="171" y="162" width="53" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0mun7kt_di" bpmnElement="SequenceFlow_0mun7kt">
+        <di:waypoint x="215" y="137" />
+        <di:waypoint x="270" y="137" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="205" y="119" width="79" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_1db1izo_di" bpmnElement="ExclusiveGateway_1db1izo" isMarkerVisible="true">
+        <dc:Bounds x="425" y="112" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="436" y="82" width="29" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1kw45wo_di" bpmnElement="SequenceFlow_1kw45wo">
+        <di:waypoint x="370" y="137" />
+        <di:waypoint x="425" y="137" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0qnw8pn_di" bpmnElement="User_Task_1">
+        <dc:Bounds x="270" y="97" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_012waqt_di" bpmnElement="SequenceFlow_012waqt">
+        <di:waypoint x="475" y="137" />
+        <di:waypoint x="530" y="137" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1kykxs4_di" bpmnElement="SequenceFlow_1kykxs4">
+        <di:waypoint x="450" y="162" />
+        <di:waypoint x="450" y="250" />
+        <di:waypoint x="530" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0w68pit_di" bpmnElement="Task_0tkjjsj">
+        <dc:Bounds x="530" y="97" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1t62rea_di" bpmnElement="Task_0vcfsbk">
+        <dc:Bounds x="530" y="210" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_03e8b7v_di" bpmnElement="EndEvent_03e8b7v">
+        <dc:Bounds x="692" y="119" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="699" y="162" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_18fq879_di" bpmnElement="SequenceFlow_18fq879">
+        <di:waypoint x="630" y="137" />
+        <di:waypoint x="692" y="137" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0mki5gb_di" bpmnElement="SequenceFlow_0mki5gb">
+        <di:waypoint x="630" y="250" />
+        <di:waypoint x="661" y="250" />
+        <di:waypoint x="661" y="137" />
+        <di:waypoint x="692" y="137" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
